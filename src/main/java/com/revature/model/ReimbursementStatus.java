@@ -31,7 +31,12 @@ public class ReimbursementStatus implements Serializable {
 		this.id = id;
 		this.status = status;
 	}
-
+	/**
+	 * Custom constructor
+	*/
+	public ReimbursementStatus(int id) {
+		this.id=id;
+	}
 	public int getId() {
 		return id;
 	}

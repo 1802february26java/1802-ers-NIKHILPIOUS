@@ -63,6 +63,14 @@ public class Employee implements Serializable, Comparable<Employee> {
 		this.email = email;
 		this.employeeRole = employeeRole;
 	}
+	
+	/**
+	 * Custom constructor
+	*/
+	public Employee(int id) {
+		this.id=id;
+
+	}
 
 	public int getId() {
 		return id;

@@ -90,6 +90,64 @@ public class Reimbursement implements Serializable, Comparable<Reimbursement> {
 		this.status = status;
 		this.type = type;
 	}
+	
+	/**
+	 * It does contain the receipt as a parameter.
+	 */
+	public Reimbursement(int id, LocalDateTime requested, LocalDateTime resolved, double amount, String description,
+			Object receipt,Employee requester, Employee approver, ReimbursementStatus status, ReimbursementType type) {
+		this.id = id;
+		this.requested = requested;
+		this.resolved = resolved;
+		this.amount = amount;
+		this.description = description;
+		this.receipt = receipt;
+		this.requester = requester;
+		this.approver = approver;
+		this.status = status;
+		this.type = type;
+	}
+	
+	/**
+	 * It doesn't contain the  resolved date +manager_id as a parameter.
+	 */
+	
+	public Reimbursement( LocalDateTime requested, double amount, String description,Object receipt,
+			Employee requester, ReimbursementStatus status, ReimbursementType type) {
+		this.requested = requested;
+		this.amount = amount;
+		this.description = description;
+		this.receipt=receipt;
+		this.requester = requester;
+		this.status = status;
+		this.type = type;
+	}
+	
+	/**
+	 * For update purpose
+	*/
+	public Reimbursement(int id,LocalDateTime resolved, ReimbursementStatus status) {
+		this.id = id;
+		this.resolved = resolved;
+		this.status = status;
+	
+	}
+	
+	/**
+	 * For select purpose without resolved date
+	*/
+	public Reimbursement(int id, LocalDateTime requested, double amount, String description,Object receipt,
+			Employee requester,Employee approver, ReimbursementStatus status, ReimbursementType type) {
+		this.id=id;
+		this.requested = requested;
+		this.amount = amount;
+		this.description = description;
+		this.receipt=receipt;
+		this.requester = requester;
+		this.approver=approver;
+		this.status = status;
+		this.type = type;
+	}
 
 	public int getId() {
 		return id;

@@ -26,6 +26,11 @@ public class EmployeeRole implements Serializable {
 	
 	public EmployeeRole() {}
 	
+	// custom constructor
+	public EmployeeRole(int id) {
+		this.id=id;
+	}
+	
 	public EmployeeRole(String type) {
 		this.type = type;
 	}
