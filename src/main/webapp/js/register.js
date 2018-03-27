@@ -10,9 +10,11 @@ window.onload = () => {
         }
         
         //Get the rest fields
-        let firstName = document.getElementById("firstName").value;
-        let lastName = document.getElementById("lastName").value;
+        let firstname = document.getElementById("firstName").value;
+        let lastname = document.getElementById("lastName").value;
         let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let roleid = document.getElementById("roleId").value;
         
         //AJAX Logic
         let xhr = new XMLHttpRequest();
@@ -30,7 +32,7 @@ window.onload = () => {
         };
 
         //Doing a HTTP to a specific endpoint
-        xhr.open("POST",`register.do?firstName=${firstName}&lastName=${lastName}&username=${username}&password=${password}`);
+        xhr.open("POST",`register.do?firstname=${firstname}&lastname=${lastname}&username=${username}&password=${password}&email=${email}&ur_id=${roleid}`);
 
         //Sending our request
         xhr.send();
@@ -43,12 +45,17 @@ function disableAllComponents() {
     document.getElementById("username").setAttribute("disabled","disabled");
     document.getElementById("password").setAttribute("disabled","disabled");
     document.getElementById("repeatPassword").setAttribute("disabled","disabled");
+    document.getElementById("email").setAttribute("disabled","disabled");
+    document.getElementById("roleId").setAttribute("disabled","disabled");
     document.getElementById("submit").setAttribute("disabled","disabled");
 }
 
 function register(data) {
+	disableAllComponents();
+    document.getElementById("registrationMessage").innerHTML = '<span class="label label-success label-center">Registration successful.</span>';
+    setTimeout(() => { window.location.replace("mngrHome.do"); }, 3000);
     //If message is a member of the JSON, something went wrong
-    if(data.message === "REGISTRATION SUCCESSFUL") {
+    /*if(data.message === "REGISTRATION SUCCESSFUL") {
         //Confirm registration and redirect to login
         disableAllComponents();
         document.getElementById("registrationMessage").innerHTML = '<span class="label label-success label-center">Registration successful.</span>';
@@ -57,5 +64,5 @@ function register(data) {
     //Something went wrong
     else {
         document.getElementById("registrationMessage").innerHTML = '<span class="label label-danger label-center">Something went wrong.</span>';
-    }
+    }*/
 }

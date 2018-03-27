@@ -34,7 +34,7 @@ public class ReimbursementTesting {
 	
 	@Test @Ignore
 	public void updateTest() {
-		remi= new Reimbursement(4,LocalDateTime.now(),new ReimbursementStatus(1));
+		remi= new Reimbursement(21,LocalDateTime.now(),new ReimbursementStatus(2));
 		assertTrue(remiRep.update(remi));
 	}
 	
@@ -46,7 +46,7 @@ public class ReimbursementTesting {
 	
 	@Test @Ignore
 	public void selectAllPendingTest() {
-		assertEquals(2,remiRep.selectAllPending().size());
+		assertEquals(5,remiRep.selectAllPending().size());
 	}
 	
 	@Test@Ignore
@@ -61,7 +61,7 @@ public class ReimbursementTesting {
 	
 	@Test@Ignore
 	public void selectFinalizedTest() {
-		assertEquals(1,remiRep.selectPending(1).size());
+		assertEquals(1,remiRep.selectFinalized(61).size());
 	}
 	@Test@Ignore
 	public void selectTypesTest() {

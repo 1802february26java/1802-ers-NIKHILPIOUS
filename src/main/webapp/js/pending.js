@@ -1,14 +1,14 @@
 window.onload = () => {
-//	 document.getElementById("username").innerHTML = sessionStorage.getItem("customerUsername");
+//	 document.getElementById("username").innerHTML = sessionStorage.getItem("employeeUsername");
 	
     //Get Event Listener
-//    document.getElementById("getPending").addEventListener("click", getAllCustomers);
+//    document.getElementById("getPending").addEventListener("click", getAllemployees);
 
-    //Get all customers as soon as the page loads
-    getAllCustomers();
+    //Get all employees as soon as the page loads
+    getAllemployees();
 }
 
-function getAllCustomers() {
+function getAllemployees() {
     //AJAX Logic
     let xhr = new XMLHttpRequest();
         
@@ -20,33 +20,33 @@ function getAllCustomers() {
             console.log(data);
 
             //Present the data to the user
-            presentCustomers(data);
+            presentemployees(data);
         }
     };
 
     //Doing a HTTP to a specific endpoint
-    xhr.open("GET",`pending.do?`);
+    xhr.open("GET",`pending.do?id=1`);
 
     //Sending our request
     xhr.send();
 }
 
-function presentCustomers(data) {
+function presentemployees(data) {
     //If message is a member of the JSON, something went wrong
     if(data.message) {
         document.getElementById("listMessage").innerHTML = '<span class="label label-danger label-center">Something went wrong.</span>';
     }
-    //We present all the customers to the user
+    //We present all the employees to the user
     else {
     	var count=0;
-        //Get customer list node
+        //Get employee list node
         let tbody = document.getElementById("tableT");
 
-        //Clean customer list
+        //Clean employee list
         var count=0;
 
-        //Iterate over all customers
-        data.forEach((customer) => {
+        //Iterate over all employees
+        data.forEach((employee) => {
         	
             //Creating node of <li>
         	let tr = document.createElement('tr');
@@ -58,10 +58,10 @@ function presentCustomers(data) {
         	let typeTd = document.createElement('td');
         	
             let countText= document.createTextNode(++count);          
-            let dateText= document.createTextNode(`${customer.requested.monthValue}-${customer.requested.dayOfMonth}-${customer.requested.year}`); 
-            let amountText= document.createTextNode(`${customer.amount}`);
-            let statusText= document.createTextNode(`${customer.status.status}`);
-            let typeText= document.createTextNode(`${customer.type.type}`);
+            let dateText= document.createTextNode(`${employee.requested.monthValue}-${employee.requested.dayOfMonth}-${employee.requested.year}`); 
+            let amountText= document.createTextNode(`${employee.amount}`);
+            let statusText= document.createTextNode(`${employee.status.status}`);
+            let typeText= document.createTextNode(`${employee.type.type}`);
             
             
             countTd.appendChild(countText);
@@ -79,9 +79,9 @@ function presentCustomers(data) {
             tbody.appendChild(tr);
             
 //            let statusTd= document.getElementById("status");
-//            customerList.innerHTML = `$customer.amount`;
+//            employeeList.innerHTML = `$employee.amount`;
 //            let typeTd= document.getElementById("type");
-//            customerList.innerHTML = "";
+//            employeeList.innerHTML = "";
         });
     }
 }

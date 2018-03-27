@@ -16,11 +16,11 @@
 
 	<dependencies>
 		<!-- OJDB7 Local Maven Repository -->
-		<dependency>
+		 <dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0</version>
-		</dependency>
+		</dependency> 
 
 		<!-- log4J Central Maven Repository -->
 		<dependency>
