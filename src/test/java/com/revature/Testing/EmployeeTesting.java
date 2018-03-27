@@ -26,13 +26,13 @@ public class EmployeeTesting {
 	
 	@Test@Ignore
 	public void insertTest() {
-		emp= new Employee(0,"nikhi","pious","niki17","123abcD","nik@gmail.com",new EmployeeRole(1));
+		emp= new Employee(0,"nikhil","pious","nikii","123","nik@gmail.com",new EmployeeRole(1));
 		assertTrue(empJdbc.insert(emp));		
 	} 
 
-	@Test@Ignore
+	@Test
 	public void selectTest() {	
-		assertEquals("nihkil",empJdbc.select("nikii").getFirstName());		
+		assertEquals("nikhil",empJdbc.select("nikii").getFirstName());		
 	} 
 
 	@Test@Ignore

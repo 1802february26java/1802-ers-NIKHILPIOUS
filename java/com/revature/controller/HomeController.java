@@ -13,4 +13,12 @@ public interface HomeController {
 	 * Returns the home view to the employee if he/she is authenticated, matching their role.
 	 */
 	public String showEmployeeHome(HttpServletRequest request);
+
+	public Object showPendingPage(HttpServletRequest request);
+
+	public Object showPofiePage(HttpServletRequest request);
+
+	public String showRequestForm(HttpServletRequest request);
+
+	public Object successReplay(HttpServletRequest request);
 }

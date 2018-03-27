@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+
+    <link rel="icon" href="images/customer.ico" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       
+    <!-- Boostrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    
+    <!-- Boostrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/our.css" />
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="home.do" class="navbar-brand"><strong id="username">Home</strong></a>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <a href="logout.do" class="navbar-brand"><strong><small>Logout</small></strong></a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="dropdown ">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Reimbursement</strong><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="getAll.do">Request Reimbursement</a></li>
+                        <li><a>Pending Reimbursement</a></li>
+                        <li><a>Resolved Reimbursement</a></li>
+                    </ul>
+                    </li>
+                </ul>
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                   <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Profile</strong><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="getAll.do">View Profile</a></li>
+                        <li><a>Update Profile</a></li>
+                    </ul>
+                </li>
+               
+            </ul>
+            
+        </div>
+    </nav>
+    
+    <div class="col-md-4 col-md-offset-4" >
+    <div class="panel panel-default">
+       <h3> "Request Submitted Succesfully"</h3>
+    </div>
+    </div>
+    <!-- JavaScript files -->
+    <script src="js/home.js"></script>
+</body>
+</html>
