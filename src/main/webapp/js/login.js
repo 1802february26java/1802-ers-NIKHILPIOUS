@@ -64,12 +64,21 @@ function sessionLogin(data){
 		document.getElementById("loginMessage").innerHTML='<span class="label label-danger label-center">Wrong credintials.</span>';
 	}
 	else{
-		sessionStorage.setItem("customerId",data.id);// it's reachable from java as well as javascript
-		sessionStorage.setItem("customerUsername",data.username);
-		sessionStorage.setItem("empFirst",data.firstname);
-		sessionStorage.setItem("empLast",data.lastname);
+		sessionStorage.setItem("empId",data.id);// it's reachable from java as well as javascript
+		sessionStorage.setItem("empUsername",data.username);
+		sessionStorage.setItem("empFirst",data.firstName);
+		sessionStorage.setItem("empLast",data.lastName);
 		sessionStorage.setItem("empEmail",data.email);
+		sessionStorage.setItem("urId",data.employeeRole.id);
+		var urId= sessionStorage.getItem("urId");
+		
+		if(urId==1){
 		window.location.replace("home.do");
+		}
+		else if(urId==2){
+			console.log(urId);
+			window.location.replace("mngrHome.do");
+		}
 	}
 }
 //
