@@ -1,11 +1,11 @@
 package com.revature.ajax;
 
-public class ClientMessage {
+public class UserMessage {
 	private String message;
 	
-	public ClientMessage() {}
+	public UserMessage() {}
 	
-	public ClientMessage(String message) {
+	public UserMessage(String message) {
 		this.message = message;
 	}
 

@@ -18,10 +18,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Our CSS -->
-<link rel="stylesheet" href="css/our.css" />
+<link rel="stylesheet" href="css/bkg.css" />
 </head>
 <body>
-	<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" style="background-color:#BDBD18;">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a href="home.do" class="navbar-brand"><strong id="username">Home</strong></a>
@@ -37,7 +37,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="request.do">Request Reimbursement</a></li>
 						<li id="pending"><a href="pendinglist.do">Pending Reimbursement</a></li>
-						<li><a>Resolved Reimbursement</a></li>
+						<li><a href="resolvelist.do">Resolved Reimbursement</a></li>
 					</ul></li>
 			</ul>
 
@@ -48,8 +48,8 @@
 					aria-expanded="false"><strong>Profile</strong><span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="getAll.do">View Profile</a></li>
-						<li><a>Update Profile</a></li>
+						<li id="vproile"><a href="viewprofile.do">View Profile</a></li>
+						<li><a href="updateprofile.do">Update Profile</a></li>
 					</ul></li>
 
 			</ul>
@@ -60,7 +60,7 @@
 
 	<div class="col-md-6 col-md-offset-4">
 		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading" >
 				<h3>Pending Reimbursement</h3>
 			</div>
 			<table class="table">

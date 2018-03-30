@@ -19,7 +19,6 @@ public class HomeControllerAlpha implements HomeController {
 	public String showEmployeeHome(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -31,7 +30,7 @@ public class HomeControllerAlpha implements HomeController {
 	public String showRequestForm(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
+
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -43,7 +42,6 @@ public class HomeControllerAlpha implements HomeController {
 	public Object successReplay(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -55,7 +53,6 @@ public class HomeControllerAlpha implements HomeController {
 	public Object showPendingPage(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -68,7 +65,7 @@ public class HomeControllerAlpha implements HomeController {
 	public Object showPofiePage(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
+
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -80,7 +77,6 @@ public class HomeControllerAlpha implements HomeController {
 	public Object updatePage(HttpServletRequest request) {
 		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
 
-		/* If customer is not logged in */
 		if(loggedCustomer == null) {
 			return "login.html";
 		}
@@ -93,7 +89,7 @@ public class HomeControllerAlpha implements HomeController {
 
 
 		if(loggedCustomer == null) {
-			System.out.println("worf");
+
 			return "login.html";
 		}
 
@@ -106,7 +102,7 @@ public class HomeControllerAlpha implements HomeController {
 
 
 		if(loggedCustomer == null) {
-			System.out.println("worf");
+	
 			return "login.html";
 		}
 
@@ -121,7 +117,7 @@ public class HomeControllerAlpha implements HomeController {
 
 
 		if(loggedCustomer == null) {
-			System.out.println("worf");
+
 			return "login.html";
 		}
 
@@ -134,7 +130,7 @@ public class HomeControllerAlpha implements HomeController {
 
 
 		if(loggedCustomer == null) {
-			System.out.println("worf");
+
 			return "login.html";
 		}
 
@@ -164,8 +160,19 @@ public class HomeControllerAlpha implements HomeController {
 
 		return "resolveEmp.html";
 	}
-	
 
+	@Override
+	public Object decisionViewPage(HttpServletRequest request) {
+		Employee loggedCustomer = (Employee) request.getSession().getAttribute("validUserInfo");
+
+		
+		if(loggedCustomer == null) {
+			return "login.html";
+		}
+
+		return "decisionviewMng.html";
+	}
+	
 
 }
 

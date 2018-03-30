@@ -1,5 +1,5 @@
 window.onload =()=>{
-	document.getElementById("username").innerHTML=  sessionStorage.getItem("customerUsername");
+	document.getElementById("username").innerHTML = sessionStorage.getItem("empUsername");
 	
 	sendProfileReq();
 	
@@ -26,34 +26,10 @@ function sendProfileReq() {
 
 function viewProfile(data){
 	
-	let panel = document.getElementById("proileP");
-	
-	
-		let h4a = document.createElement('h4');
-		let h4b = document.createElement('h4');
-		let h4c = document.createElement('h4');
-		let h4d = document.createElement('h4');
-		let h4e = document.createElement('h4');
-		
-		console.log( `${data.username}`);
-		
-		let htxt1 = document.createTextNode("UserName:"+ `${data.username}`);
-		let htxt2 = document.createTextNode("Name: "+ `${data.firstName}`+" "+ `${data.lastName}`);
-		let htxt3 = document.createTextNode("Email: "+`${data.email}` );
-		
-		console.log();
-		h4a.appendChild(htxt1);
-		h4b.appendChild(htxt2);
-		h4c.appendChild(htxt3);
-		
-		
-		panel.appendChild(h4a);
-		panel.appendChild(h4b);
-		panel.appendChild(h4c);
-		
-		
-		
-		
-	
+
+	document.getElementById("userid").innerHTML = '<h4>USERID: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<b>'+`${data.id}`+'</b></h4>';;
+	document.getElementById("uname").innerHTML = '<h4>USERNAME: &nbsp;&nbsp;&nbsp;'+'<b>'+`${data.username}`+'</b></h4>';
+	document.getElementById("fullname").innerHTML = '<h4>NAME: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;'+'<b>'+`${data.firstName}`+" "+ `${data.lastName}`+'</b></h4>';
+	document.getElementById("email").innerHTML = '<h4>EMAIL: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'<b>'+ `${data.email}`+'</b></h4>';
 	
 }

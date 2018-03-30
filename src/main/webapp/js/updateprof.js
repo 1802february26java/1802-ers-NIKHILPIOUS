@@ -1,4 +1,6 @@
 window.onload = () => {
+	document.getElementById("username").innerHTML = sessionStorage.getItem("empUsername");
+	
     document.getElementById("update").addEventListener("click",()=>{
     let empId= sessionStorage.getItem("empId");
     
@@ -7,7 +9,7 @@ window.onload = () => {
     let email = document.getElementById("email").value;
     let password= document.getElementById("password").value;
     
-    if(!firstname){//means empty string
+    if(!firstname){
     	
     	firstname=sessionStorage.getItem("empFirst");
     }
@@ -22,29 +24,23 @@ window.onload = () => {
 	let xhr=new XMLHttpRequest();
 	
 	xhr.onreadystatechange = ()=>{
-		if(xhr.readyState===XMLHttpRequest.DONE && xhr.status===200){ // this we retrive from response, as this moment we done with request
-			//yoou are getting an 
+		if(xhr.readyState===XMLHttpRequest.DONE && xhr.status===200){
 			let data= JSON.parse(xhr.responseText)
-			console.log(data);
 			sessionLogin(data);
 			
 		}
 	};
-	xhr.open("POST",`updateprof.do?empId=${empId}&firstname=${firstname}&lastname=${lastname}&email=${email}&password=${password}`);// imagine this as going to a particular servlet using the URI sumbit.do
+	xhr.open("POST",`updateprof.do?empId=${empId}&firstname=${firstname}&lastname=${lastname}&email=${email}&password=${password}`);
 
 	xhr.send();
 });
 }
     
 function sessionLogin(data){
-	
-//		sessionStorage.setItem("customerId",data.id);// it's reachable from java as well as javascript
-//		sessionStorage.setItem("customerUsername",data.username);
-		
-		window.location.replace("success.do");
-	
+	if(data.message==="UPDATE FAILED"){
+		document.getElementById("updatEmessage").innerHTML = '<scope class="label label-danger label center"> Profile update failed ></scope>';
+	}
+	else 
+		document.getElementById("updatEmessage").innerHTML = '<scope class="label label-success label center"> Profile updated></scope>';	
 }
 
-function errorMessage(dataFromServer){
-    document.getElementById("message").innerHTML = '<scope class="label label-danger label center"> Request not successfully submitted ></scope>';
-}

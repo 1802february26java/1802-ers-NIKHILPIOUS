@@ -21,24 +21,25 @@
 <link rel="stylesheet" href="css/our.css" />
 </head>
 <body>
- <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style="background-color:#F0850B;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.do" class="navbar-brand"><strong id="username">Home</strong></a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <a href="register.do" class="navbar-brand"><strong><small>Register</small></strong></a>
+                <a href="mngrHome.do" class="navbar-brand"><strong id="username">Home</strong></a>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <a href="logout.do" class="navbar-brand"><strong><small>Logout</small></strong></a>
             </div>
+            <div class="nav navbar-nav navbar-right">
+                <a href="register.do" class="navbar-brand"><strong><small>Register</small></strong></a>
+            </div>
+            
             <ul class="nav navbar-nav">
               <li class="dropdown ">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Reimbursement</strong><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="decision.do">Approve/Deny Reimbursement</a></li>
+             
                         <li><a href="pendingmngrredir.do">Pending Reimbursement of All</a></li>
-                        <li><a href="viewsallresredir.do">Resolved Reimbursement</a></li>
+                        <li><a href="viewsallresredir.do">Resolved Reimbursement of All</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -46,9 +47,8 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                    <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Profile</strong><span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Admin Options</strong><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li id="viewres"><a href="viewspecficmngrredir.do">View Specific reim</a></li>
                         <li id="viewemp"><a href="viewprofileAllmngrredir.do">View Employees</a></li>
                     </ul>
                 </li>
@@ -70,6 +70,7 @@
 						<th scope="col">#</th>
 						<th scope="col">Date</th>
 						<th scope="col">Resolved Date</th>
+						<th scope="col">EmpID</th>
 						<th scope="col">Amount</th>
 						<th scope="col">Status</th>
 						<th scope="col">Type</th>
@@ -85,11 +86,7 @@
 					</tr> -->
 				</tbody>
 			</table>
-			<!-- <div id="listMessage"></div>
-			<button id="getPending"
-				class="btn btn-md btn-success btn-block btn-list">GET</button>
-			<div class="panel-footer"></div>
-		</div> -->
+	
 		</div>
 	</div>
 	

@@ -21,7 +21,8 @@
 <link rel="stylesheet" href="css/our.css" />
 </head>
 <body>
- <nav class="navbar navbar-default" style="background-color:#40AACA;">
+
+  <nav class="navbar navbar-default" style="background-color:#BEB3A7;" >
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="mngrHome.do" class="navbar-brand"><strong id="username">Home</strong></a>
@@ -59,24 +60,23 @@
     </nav>
 
 
-	<div class="col-md-6 col-md-offset-4 ">
-		<div class="panel panel-default"  style="background-color:#B9D5DD;">
-			<div class="panel-heading">
-				<h3>Pending Reimbursement</h3>
+	<div class="col-md-6 col-md-offset-4" >
+		<div class="panel panel-default" >
+			<div class="panel-heading" style="background-color:#BEB3A7;">
+				<h3>Reimbursement List</h3>
 			</div>
 			<table class="table">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">Date</th>
-						<th scope="col">Emp ID</th>
+						<th scope="col">Requested Date</th>
+						<th scope="col">Resolved Date</th>
 						<th scope="col">Amount</th>
 						<th scope="col">Status</th>
 						<th scope="col">Type</th>
-						
 					</tr>
 				</thead>
-				<tbody id="tableTP">
+				<tbody id="tableTVR">
 					<!-- <tr>
 						<th scope="row" id="count">1</th>
 						<td id="date">e</td>
@@ -86,17 +86,15 @@
 					</tr> -->
 				</tbody>
 			</table>
-			<!-- <div id="listMessage"></div>
-			<button id="getPending"
-				class="btn btn-md btn-success btn-block btn-list">GET</button>
-			<div class="panel-footer"></div>
-		</div> -->
+			<div class="panel-footer">
+                <div id="resolveMessage"></div>
+            </div>
 		</div>
 	</div>
 	
 
 	<!-- JavaScript files -->
-	<script src="js/pendingMng.js"></script>
+	<script src="js/decisionviewMng.js"></script>
 	
 </body>
 </html>

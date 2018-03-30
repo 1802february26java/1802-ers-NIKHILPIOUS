@@ -35,4 +35,6 @@ public interface HomeController {
 	public Object mngrAllEmpPage(HttpServletRequest request);
 
 	public Object showResolvedPage(HttpServletRequest request);
+
+	public Object decisionViewPage(HttpServletRequest request);
 }

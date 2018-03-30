@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="css/our.css" />
 </head>
 <body>
-	<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" style="background-color:#73C273;">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a href="home.do" class="navbar-brand"><strong id="username">Home</strong></a>
@@ -37,7 +37,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="request.do">Request Reimbursement</a></li>
 						<li id="pending"><a href="pendinglist.do">Pending Reimbursement</a></li>
-						<li><a>Resolved Reimbursement</a></li>
+						<li><a href="resolvelist.do">Resolved Reimbursement</a></li>
 					</ul></li>
 			</ul>
 
@@ -48,8 +48,8 @@
 					aria-expanded="false"><strong>Profile</strong><span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="getAll.do">View Profile</a></li>
-						<li><a>Update Profile</a></li>
+						<li id="vproile"><a href="viewprofile.do">View Profile</a></li>
+						<li><a href="updateprofile.do">Update Profile</a></li>
 					</ul></li>
 
 			</ul>
@@ -57,10 +57,9 @@
 		</div>
 	</nav>
 
-
 	<div class="col-md-6 col-md-offset-4">
 		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading "style="background-color:#73C273;">
 				<h3>Resolved Reimbursement</h3>
 			</div>
 			<table class="table">
@@ -74,7 +73,7 @@
 						<th scope="col">Type</th>
 					</tr>
 				</thead>
-				<tbody id="tableTE">
+				<tbody id="tableTE" >
 					<!-- <tr>
 						<th scope="row" id="count">1</th>
 						<td id="date">e</td>
@@ -84,11 +83,7 @@
 					</tr> -->
 				</tbody>
 			</table>
-			<!-- <div id="listMessage"></div>
-			<button id="getPending"
-				class="btn btn-md btn-success btn-block btn-list">GET</button>
-			<div class="panel-footer"></div>
-		</div> -->
+		
 		</div>
 	</div>
 	

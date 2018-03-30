@@ -51,66 +51,71 @@ public class RequestHelper {
 			return LoginControllerAlpha.getInstance().login(request);
 		case"/ERS/home.do":
 			return HomeControllerAlpha.getInstance().showEmployeeHome(request);
-		case"/ERS/request.do":
+		case "/ERS/request.do":
 			return HomeControllerAlpha.getInstance().showRequestForm(request);
-		case"/ERS/pendinglist.do":
+		case "/ERS/pendinglist.do":
 			return HomeControllerAlpha.getInstance().showPendingPage(request);
-		case"/ERS/resolvelist.do":
+		case "/ERS/resolvelist.do":
 			return HomeControllerAlpha.getInstance().showResolvedPage(request);
-		case"/ERS/submit.do":
+		case "/ERS/submit.do":
 			return ReimbursementControllerAlpha.getInstance().submitRequest(request);
-		case"/ERS/success.do":
+		case "/ERS/success.do":
 			return HomeControllerAlpha.getInstance().successReplay(request);
-		case"/ERS/pending.do":
+		case "/ERS/pending.do":
 			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);
-		case"/ERS/viewprofile.do":
+		case "/ERS/viewprofile.do":
 			return HomeControllerAlpha.getInstance().showPofiePage(request);
-		case "/ERS/profile.do":	
+		case "/ERS/profile.do":
 			return EmployeeInformationControllerAlpha.getInstance().viewEmployeeInformation(request);
-		case"/ERS/updateprofile.do":
+		case "/ERS/updateprofile.do":
 			return HomeControllerAlpha.getInstance().updatePage(request);
-		case "/ERS/updateprof.do":	
+		case "/ERS/updateprof.do":
 			return EmployeeInformationControllerAlpha.getInstance().updateEmployee(request);
-		case"/ERS/resolveemp.do":
+		case "/ERS/resolveemp.do":
 			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);
-			
-			
-		case"/ERS/register.do":
+
+		case "/ERS/register.do":
 			return EmployeeInformationControllerAlpha.getInstance().registerEmployee(request);
-		case"/ERS/mngrHome.do":   
+		case "/ERS/mngrHome.do":
 			return HomeControllerAlpha.getInstance().showManagerHome(request);
-		case"/ERS/pendingmngrredir.do":{
-			System.out.println("reggg1");
-			return HomeControllerAlpha.getInstance().mngrPendPage(request);}
-		case"/ERS/pendingmngr.do":{
-			System.out.println("reggg12");
-			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);}
-		
-		
-		case"/ERS/viewspecficmngrredir.do":{
-			System.out.println("reggg22");
-			return HomeControllerAlpha.getInstance().mngrViewSpeceficPage(request);}
-		case"/ERS/viewspecficmngr.do":{
-			System.out.println("reggg2");
-			return ReimbursementControllerAlpha.getInstance().singleRequest(request);}
-		
-		
-		case"/ERS/viewprofileAllmngrredir.do":{
-			System.out.println("reggg33");
-			return HomeControllerAlpha.getInstance().mngrAllEmpPage(request);}
-		case"/ERS/viewprofileAllmngr.do":{
-			System.out.println("reggg3");
-			return EmployeeInformationControllerAlpha.getInstance().viewAllEmployees(request);}
-		
-		case"/ERS/viewsallresredir.do":{
-			System.out.println("reggg44");
-			return HomeControllerAlpha.getInstance().mngrAllResPage(request);}
-		case"/ERS/viewsallres.do":{
-			System.out.println("reggg4");
-			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);}
-		
-		
-		
+		case "/ERS/pendingmngrredir.do":
+
+			return HomeControllerAlpha.getInstance().mngrPendPage(request);
+		case "/ERS/pendingmngr.do":
+
+			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);
+
+		case "/ERS/viewspecficmngrredir.do":
+
+			return HomeControllerAlpha.getInstance().mngrViewSpeceficPage(request);
+		case "/ERS/viewspecficmngr.do":
+
+			return ReimbursementControllerAlpha.getInstance().singleRequest(request);
+
+		case "/ERS/viewprofileAllmngrredir.do":
+
+			return HomeControllerAlpha.getInstance().mngrAllEmpPage(request);
+		case "/ERS/viewprofileAllmngr.do":
+			return EmployeeInformationControllerAlpha.getInstance().viewAllEmployees(request);
+
+		case "/ERS/viewsallresredir.do":
+
+			return HomeControllerAlpha.getInstance().mngrAllResPage(request);
+		case "/ERS/viewsallres.do":
+
+			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);
+
+		case "/ERS/getselectedemp.do":
+
+			return ReimbursementControllerAlpha.getInstance().multipleRequests(request);
+
+		case "/ERS/decisionview.do":
+
+			return HomeControllerAlpha.getInstance().decisionViewPage(request);
+
+		case "/ERS/decision.do":
+			return ReimbursementControllerAlpha.getInstance().finalizeRequest(request);
+
 		default:
 			return new ErrorControllerAlpha().showError(request);
 		}

@@ -1,54 +1,47 @@
 window.onload = () => {
-//	 document.getElementById("username").innerHTML = sessionStorage.getItem("employeeUsername");
-	
-    //Get Event Listener
-//    document.getElementById("getPending").addEventListener("click", getAllemployees);
 
-    //Get all employees as soon as the page loads
     getAllemployees();
 }
 
 function getAllemployees() {
-    //AJAX Logic
+	document.getElementById("username").innerHTML = sessionStorage.getItem("empUsername");
+
     let xhr = new XMLHttpRequest();
         
     xhr.onreadystatechange = () => {
-        //If the request is DONE (4), and everything is OK
+ 
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            //Getting JSON from response body
+  
             let data = JSON.parse(xhr.responseText);
             console.log(data);
 
-            //Present the data to the user
             presentemployees(data);
         }
     };
+    xhr.open("GET",`resolveemp.do?reqpor_id=2`);
 
-    //Doing a HTTP to a specific endpoint
-    xhr.open("GET",`resolveemp.do?id=2`);
 
-    //Sending our request
     xhr.send();
 }
 
 function presentemployees(data) {
-    //If message is a member of the JSON, something went wrong
+
     if(data.message) {
         document.getElementById("listMessage").innerHTML = '<span class="label label-danger label-center">Something went wrong.</span>';
     }
-    //We present all the employees to the user
+
     else {
     	var count=0;
-        //Get employee list node
+
         let tbody = document.getElementById("tableTE");
 
-        //Clean employee list
+
         var count=0;
 
-        //Iterate over all employees
+ 
         data.forEach((employee) => {
         	
-            //Creating node of <li>
+
         	let tr = document.createElement('tr');
         	
         	let countTd = document.createElement('td');
@@ -81,11 +74,7 @@ function presentemployees(data) {
             tr.appendChild(typeTd);
             
             tbody.appendChild(tr);
-            
-//            let statusTd= document.getElementById("status");
-//            employeeList.innerHTML = `$employee.amount`;
-//            let typeTd= document.getElementById("type");
-//            employeeList.innerHTML = "";
+
         });
     }
 }

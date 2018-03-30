@@ -9,65 +9,63 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
        
     <!-- Boostrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
     
     <!-- Boostrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- Our CSS -->
-    <link rel="stylesheet" href="css/our.css" />
+    <link rel="stylesheet" href="css/mngerHome.css" />
 </head>
 <body>
-    <nav class="navbar navbar-default">
+
+    <nav class="navbar navbar-default bg-danger">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="home.do" class="navbar-brand"><strong id="username">Home</strong></a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <a href="register.do" class="navbar-brand"><strong><small>Register</small></strong></a>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-                <a href="logout.do" class="navbar-brand"><strong><small>Logout</small></strong></a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li class="dropdown ">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Reimbursement</strong><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="decision.do">Approve/Deny Reimbursement</a></li>
-                        <li><a href="pendingmngrredir.do">Pending Reimbursement of All</a></li>
-                        <li><a href="viewsallresredir.do">Resolved Reimbursement</a></li>
-                    </ul>
-                    </li>
-                </ul>
+                <a href="mngrHome.do" class="navbar-brand"><strong id="username">Home</strong></a>
                 
-                
-                <ul class="nav navbar-nav navbar-right">
-                   <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><strong>Profile</strong><span class="caret"></span></a>
+                  <ul class="nav navbar-nav mr-auto">
+                   <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><strong>Admin Options</strong><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li id="viewres"><a href="viewspecficmngrredir.do">View Specific reim</a></li>
-                        <li id="viewemp"><a href="viewprofileAllmngrredir.do">View Employees</a></li>
+                       <!--  <li class="dropdown-item" id="vproile"><a href="viewspecficmngrredir.do">View Specific reim</a></li> -->
+                        <li class="dropdown-item" id="uprofile"><a href="viewprofileAllmngrredir.do">View Employees</a></li>
                     </ul>
                 </li>
                
-            </ul>
+            </ul> 
+            </div>
+            <span class="navbar-text" ><h3>Manager Portal</h3></span>
+            
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                       <a href="register.do" class="navbar-brand"><strong>Register</strong></a>
+
+                    <li class="nav-item">
+                       <a href="logout.do" class="navbar-brand"><strong>Logout</strong></a>
+                    </li>
+
+                    
+	</ul>
+                
+            </div>
+            
             
         </div>
     </nav>
-<!--     
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Customers</h3>
-            </div>
-            <ul id="customerList" class="list-group">
-            </ul>
-            <div id="listMessage"></div>
-            <button id="getCustomers" class="btn btn-md btn-success btn-block btn-list">GET</button>
-            <div class="panel-footer">
-            </div>
-        </div>
-    </div> -->
+    
+    
+    
+    <section class="container" id="option-list">
+    
+  <div class="list-group  bg-warning">
+  <button type="button" class="list-group-item" id="option-two"><a href="pendingmngrredir.do"><h4 class="text-center text-dark">Pending Reimbursement of All Employee's</h4></a></button>
+  </div><br>
+  <div class="list-group text-center">
+  <button type="button" class="list-group-item bg-success" id="option-three"><a href="viewsallresredir.do"><h4 class="text-center text-dark">Resolved Reimbursement All Employee's</h4></a></button>
+  </div>
+</section>
+  
     <!-- JavaScript files -->
     <script src="js/home.js"></script>
 </body>

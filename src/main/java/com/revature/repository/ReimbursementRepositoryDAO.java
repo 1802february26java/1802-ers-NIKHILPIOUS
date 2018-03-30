@@ -1,25 +1,26 @@
 package com.revature.repository;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.log4j.Logger;
 
 import com.revature.model.Employee;
 import com.revature.model.Reimbursement;
 import com.revature.model.ReimbursementStatus;
 import com.revature.model.ReimbursementType;
 import com.revature.util.ConnectionUtil;
+import com.revature.util.ERSQueryConstants;
 
 public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	
 	private static ReimbursementRepository reimburseRepo = new ReimbursementRepositoryDAO(); 
-	
+	private static Logger logger = Logger.getLogger(ReimbursementRepositoryDAO.class);
 	private ReimbursementRepositoryDAO() {};
 	
 	public static ReimbursementRepository getInstance() {
@@ -29,7 +30,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	@Override
 	public boolean insert(Reimbursement reimbursement) {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
-			String sql="INSERT INTO reimbursement (r_requested,r_amount,r_description,r_receipt,employee_id,rs_id,rt_id) VALUES(?,?,?,?,?,?,?)"; 
+			String sql=ERSQueryConstants.REIMBURSEMENT_INSERT; 
 			PreparedStatement prepstmt= connection.prepareStatement(sql);
 			int parameterIndex=0;
 			LocalDateTime resolvedTime=reimbursement.getResolved();
@@ -47,7 +48,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			}
 			}
 			catch(SQLException|NullPointerException e) {
-				e.printStackTrace();
+				logger.error("Reimbursement insertion failed", e);
 			}
 		return false;
 	}
@@ -55,8 +56,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	@Override
 	public boolean update(Reimbursement reimbursement) {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
-			String sql = "UPDATE (SELECT rms.r_resolved,rmst.rs_id FROM  reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id WHERE rms.r_id=?)"
-					+ "SET r_resolved=?, rs_id=?";
+			String sql = ERSQueryConstants.REIMBURSEMENT_UPDATE;
 			PreparedStatement prepstmt= connection.prepareStatement(sql);
 			int parameterIndex=0;
 			prepstmt.setInt(++parameterIndex,reimbursement.getId() );
@@ -67,7 +67,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			}
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement update failed", e);
 		}
 		return false;
 	}
@@ -75,8 +75,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	@Override
 	public Reimbursement select(int reimbursementId) {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
-			String sql="SELECT rms.r_id,rms.r_requested,rms.r_resolved,rms.r_amount,rms.r_description,rms.r_receipt,rms.employee_id,rms.manager_id,rms.rs_id,rms.rt_id,rmst.rs_status,rmtp.rt_type FROM "
-					+ "reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id JOIN reimbursement_type rmtp ON rms.rt_id= rmtp.rt_id WHERE rms.r_id=?";
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT;
 			
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			prepstmt.setInt(1, reimbursementId);
@@ -97,7 +96,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 				}
 		}
 		catch(SQLException |NullPointerException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement select failed", e);
 		}
 		
 		return null;
@@ -107,8 +106,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	public Set<Reimbursement> selectPending(int employeeId) {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
 			Set <Reimbursement> reimbursementList =  new HashSet<>();
-			String sql="SELECT rms.r_id,rms.r_requested,rms.r_resolved,rms.r_amount,rms.r_description,rms.r_receipt,rms.employee_id,rms.manager_id,rms.rs_id,rms.rt_id,rmst.rs_status,rmtp.rt_type FROM "
-					+ "reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id JOIN reimbursement_type rmtp ON rms.rt_id= rmtp.rt_id WHERE rms.employee_id=? AND UPPER(rmst.rs_status)='PENDING'";
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT_PENDING;
 			int parameterIndex=0;
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			prepstmt.setInt(++parameterIndex, employeeId);
@@ -123,7 +121,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement select pedning request failed", e);
 		}
 		
 		return null;
@@ -133,8 +131,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	public Set<Reimbursement> selectFinalized(int employeeId) {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
 			Set <Reimbursement> reimbursementList =  new HashSet<>();
-			String sql="SELECT rms.r_id,rms.r_requested,rms.r_resolved,rms.r_amount,rms.r_description,rms.r_receipt,rms.employee_id,rms.manager_id,rms.rs_id,rms.rt_id,rmst.rs_status,rmtp.rt_type FROM "
-					+ "reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id JOIN reimbursement_type rmtp ON rms.rt_id= rmtp.rt_id WHERE rms.employee_id=? AND (UPPER(rmst.rs_status)='DECLINED' OR UPPER(rmst.rs_status)='APPROVED')"; 
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT_FINALIZED;
 			int parameterIndex=0;
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			prepstmt.setInt(++parameterIndex, employeeId);
@@ -148,7 +145,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement select resoved requests failed", e);
 		}
 		
 		return null;
@@ -158,8 +155,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	public Set<Reimbursement> selectAllPending() {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
 			Set <Reimbursement> reimbursementList =  new HashSet<>();
-			String sql="SELECT rms.r_id,rms.r_requested,rms.r_resolved,rms.r_amount,rms.r_description,rms.r_receipt,rms.employee_id,rms.manager_id,rms.rs_id,rms.rt_id,rmst.rs_status,rmtp.rt_type FROM "
-					+ "reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id JOIN reimbursement_type rmtp ON rms.rt_id= rmtp.rt_id WHERE UPPER(rmst.rs_status)='PENDING'";
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT_ALL_PENDING;
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			ResultSet rs = prepstmt.executeQuery();
 			while(rs.next()) {
@@ -171,7 +167,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			return reimbursementList;
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement selecting all pending requests failed", e);
 		}
 		
 		return null;
@@ -181,8 +177,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	public Set<Reimbursement> selectAllFinalized() {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
 			Set <Reimbursement> reimbursementList =  new HashSet<>();
-			String sql="SELECT rms.r_id,rms.r_requested,rms.r_resolved,rms.r_amount,rms.r_description,rms.r_receipt,rms.employee_id,rms.manager_id,rms.rs_id,rms.rt_id,rmst.rs_status,rmtp.rt_type FROM "
-					+ "reimbursement rms JOIN reimbursement_status rmst ON rms.rs_id= rmst.rs_id JOIN reimbursement_type rmtp ON rms.rt_id= rmtp.rt_id WHERE UPPER(rmst.rs_status)='DECLINED' OR UPPER(rmst.rs_status)='APPROVED'"; 
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT_ALL_FINALIZED; 
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			ResultSet rs = prepstmt.executeQuery();
 			while(rs.next()) {
@@ -203,7 +198,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 	public Set<ReimbursementType> selectTypes() {
 		try(Connection connection = ConnectionUtil.getConnection()){ 
 			Set <ReimbursementType> reimbursementList =  new HashSet<>();
-			String sql=" SELECT * FROM reimbursement_type";
+			String sql=ERSQueryConstants.REIMBURSEMENT_SELECT_ALL_TYPES;
 			PreparedStatement prepstmt = connection.prepareStatement(sql);
 			ResultSet rs = prepstmt.executeQuery();
 			while(rs.next()) {
@@ -213,7 +208,7 @@ public class ReimbursementRepositoryDAO implements ReimbursementRepository {
 			return reimbursementList;
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			logger.error("Reimbursement types select failed", e);
 		}
 		
 		return null;

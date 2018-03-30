@@ -22,7 +22,6 @@ public class EmployeeServiceBO implements EmployeeService {
 	public Employee authenticate(Employee employee) {
 		
 		Employee loggedEmp = EmployeeRepositoryDAO.getInstance().select(employee.getUsername());
-		
 		if(loggedEmp.getPassword().equals(EmployeeRepositoryDAO.getInstance().getPasswordHash(employee))){
 			return loggedEmp;
 		}

@@ -1,11 +1,20 @@
 
 body{
-    background-color:#995858;
+    background-image: url("hcom6.jpg");
+    background-repeat: no-repeat;
+    /* background-color:#995858; */
+    background-size: 100%;
     
 }
+
 #ersmain{
     margin-top:300px;
 }
 button{
 	 text-decoration: none;
+}
+.cstm-form{
+    position:absolute;
+    top:30%;
+    left:40%;
 }

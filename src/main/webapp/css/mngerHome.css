@@ -1,7 +1,22 @@
+
+body{
+    background-image: url("bg-m-2.jpg");
+    background-repeat: no-repeat;  
+    /*  background-color:#995858; */ 
+    background-size: 100%;
+    
+}
+.navbar{
+	opacity:0.7;
+}
+.navbar:hover{
+	opacity:1.0;
+}
 a {
+	 color: black;
+  	text-decoration: none; 
     cursor: pointer;
 }
-
 .navbar-default {
     background-color: black;
 }
@@ -41,4 +56,25 @@ a {
 
 .list-group-item {
     text-align: center;
+}
+
+#option-one{
+	background-color:#479DD6; 
+	
+}
+#option-two{
+	background-color:#BDBD18;
+	color:white;
+}
+
+
+#option-three{
+	background-color:#55E937;
+	
+}
+
+#option-list{
+	position:absolute;
+	top:30%;
+	left:20%;
 }

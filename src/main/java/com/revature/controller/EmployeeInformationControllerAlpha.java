@@ -5,10 +5,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.revature.ajax.ClientMessage;
+import com.revature.ajax.UserMessage;
 import com.revature.model.Employee;
 import com.revature.model.EmployeeRole;
 import com.revature.service.EmployeeServiceBO;
+import com.revature.util.ERSConstants;
 
 public class EmployeeInformationControllerAlpha implements EmployeeInformationController {
 	
@@ -28,7 +29,7 @@ public class EmployeeInformationControllerAlpha implements EmployeeInformationCo
 		}
 		HttpSession session = request.getSession();
 		Employee mngr = (Employee)session.getAttribute("validUserInfo");
-		ClientMessage cmsg = null;
+		UserMessage usermessage = null;
 		
 		if(mngr.getEmployeeRole().getId()==2) {
 			String firstName=request.getParameter("firstname");
@@ -39,33 +40,34 @@ public class EmployeeInformationControllerAlpha implements EmployeeInformationCo
 			EmployeeRole empRole = new EmployeeRole(Integer.parseInt(request.getParameter("ur_id")));
 					
 			Employee newEmp = new Employee();
-			newEmp.setFirstName(firstName);
-			newEmp.setLastName(lastName);
+			
 			newEmp.setUsername(userName);
+			if(EmployeeServiceBO.getInstance().isUsernameTaken(newEmp)==false) {
+				return new UserMessage(ERSConstants.EMPLOYEE_MESSAGE_USERNAME_TAKEN);
+			}
+			newEmp.setLastName(lastName);
+			newEmp.setFirstName(firstName);
 			newEmp.setPassword(password);
 			newEmp.setEmail(email);
 			newEmp.setEmployeeRole(empRole);
 			
 			if(EmployeeServiceBO.getInstance().createEmployee(newEmp)) {
-				System.out.println("registerd");
-				cmsg = new ClientMessage("SUCCESS"); 
+				return new UserMessage(ERSConstants.EMPLOYEE_MESSAGE_REGISTRATION_SUCCESSFUL); 
 			}
 			else {
-				return "error.html";
+				return new UserMessage(ERSConstants.EMPLOYEE_MESSAGE_REGISTRATION_UNSUCCESSFUL);
 			}
 			}
 		else {
-			return "hackPage.html";
+			return new UserMessage(ERSConstants.UNAUTHORIZED_ATTEMPT_MESSAGE);
 		}
-	
-		return cmsg;
 	}
 
 	@Override
 	public Object updateEmployee(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee emp = (Employee)session.getAttribute("validUserInfo");
-		ClientMessage cmsg = new ClientMessage();
+		UserMessage usermessage = new UserMessage();
 		int empId=Integer.valueOf(request.getParameter("empId"));
 		String firstName=request.getParameter("firstname");
 		String lastName=request.getParameter("lastname");
@@ -82,109 +84,98 @@ public class EmployeeInformationControllerAlpha implements EmployeeInformationCo
 			EmployeeServiceBO.getInstance().updatePassword(updateEmp);
 			updateEmp.setPassword(EmployeeServiceBO.getInstance().getEmployeeInformation(updateEmp).getPassword());
 		}
-		else {//if its empty
+		else {
 			updateEmp.setPassword(EmployeeServiceBO.getInstance().getEmployeeInformation(updateEmp).getPassword());
 			
 		}
 
 		if(EmployeeServiceBO.getInstance().updateEmployeeInformation(updateEmp)) {
-			 cmsg.setMessage("SUCCESS");
+			 usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_UPDATE_SUCCESSFUL);
 		}
 		else {
-			return "400.html";
+			 usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_UPDATE_SUCCESSFUL);
 		}
-		return cmsg;
+		return usermessage;
 	}
 
 	@Override
 	public Object viewEmployeeInformation(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		Employee validEmp = (Employee)session.getAttribute("validUserInfo");//it has all the inforamtion about an employee Includes the user id
-		Object htmlPage = "";
+		Employee validEmp = (Employee)session.getAttribute("validUserInfo");
+		UserMessage usermessage = new UserMessage();
 		int roleid= validEmp.getEmployeeRole().getId();
-		System.out.println(roleid+";kijipp");
 		if(validEmp.getEmployeeRole().getId()==1) {
-			
-			// imagine you click on view my profile , then it will send a request along with the userid
-			//so of now I am thinking I will get user id aliong with tthe request
-			//if it's not true then i cna get the userid from claiduserinfio anyway
 			Employee temp = new  Employee();
-			//temp.setId(Integer.parseInt(request.getParameter("emp_id")));
 			int emp_id= validEmp.getId();
 			temp.setId(emp_id);
-			
-			//Employee emp = EmployeeServiceBO.getInstance().getEmployeeInformation(validEmp);
-			
-			Employee emp = EmployeeServiceBO.getInstance().getEmployeeInformation(temp);
-			
-			if(emp==null) {
-				htmlPage="error.html";
+			Employee employee = EmployeeServiceBO.getInstance().getEmployeeInformation(temp);
+			if(employee==null) {
+				usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_VIEW_INFORMATIOAN);
 			}
 			else {
-				htmlPage= emp;
+				return employee;
 			}
-			}
-		else if(validEmp.getEmployeeRole().getId()==2) {
-			// i belive manger pick a empoloyee either from a list , ort  typing hios first or last name
 			
+			}
+		else if(validEmp.getEmployeeRole().getId()==2) {//*******************************
 			Employee temp = new  Employee();
 			temp.setId(Integer.parseInt(request.getParameter("emp_id")));
-			Employee emp = EmployeeServiceBO.getInstance().getEmployeeInformation(temp);
-			if(emp==null) {
-				htmlPage="error.html";
+			Employee employee = EmployeeServiceBO.getInstance().getEmployeeInformation(temp);
+			if(employee==null) {
+				usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_UNKNOWN_FOR_NOW);
 			}
 			else {
-				htmlPage="myProfile.html";
+				
+				return "myProfile.html";
 			}
 		}
 
-		return htmlPage;
+		return usermessage;
 	}
 
 	@Override
 	public Object viewAllEmployees(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee validEmp = (Employee)session.getAttribute("validUserInfo");
-		String htmlPage = "";
+		UserMessage usermessage = new UserMessage();
 		if(validEmp.getEmployeeRole().getId()==2) {
 			Set<Employee> listOfEmps= EmployeeServiceBO.getInstance().getAllEmployeesInformation();
 			
 			if(listOfEmps==null) {
-				htmlPage="null.html";
+				usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_VIEW_EMP_LIST);
 			}
 			else {
-				htmlPage="listEmp.html";
+				return listOfEmps;
 			}
 			
 		}
 		else {
-			htmlPage="hackPage.html";
+			usermessage.setMessage(ERSConstants.UNAUTHORIZED_ATTEMPT_MESSAGE);
 		}
-		return htmlPage;
+		return usermessage;
 	}
 
 	@Override
 	public Object usernameExists(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee validEmp = (Employee)session.getAttribute("validUserInfo");
-		String htmlPage = "";
+		UserMessage usermessage = new UserMessage();
 		if(validEmp.getEmployeeRole().getId()==2) {
 			Employee tempEmp = new Employee();
 			tempEmp.setUsername(request.getParameter("username"));
 
 			if(EmployeeServiceBO.getInstance().isUsernameTaken(tempEmp)){
-				htmlPage="goodToGO.html";
+				usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_USERNAME_AVAILABLITY_VALID);
+
 			}
 			else {
-				htmlPage="UserNameTaken.html";
+				usermessage.setMessage(ERSConstants.EMPLOYEE_MESSAGE_USERNAME_AVAILABLITY_UNSUCCESSFUL);
 			}
 			
 		}
-		else {
-			htmlPage="hackPage.html";
-		}
+
 	
-		return htmlPage;
+		return usermessage;
 	}
 
 }
